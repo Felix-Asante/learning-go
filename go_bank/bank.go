@@ -1,10 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
+const balanceFileName = "balance.txt"
 
 func main() {
 
-	var accountBalance float64 = 1000
+	var accountBalance float64 = getBalanceFromFile()
 	endApp := false
 
 	fmt.Println("Welcome to Go bank !")
@@ -51,6 +57,7 @@ func withrawAmount(accountBalance float64) float64 {
 		return accountBalance
 	}
 	accountBalance = calculateNewBalance(accountBalance, withdrawAmount, "withdraw")
+	writeBalanceToFile(accountBalance)
 	fmt.Println("Your balance is:", accountBalance)
 	return accountBalance
 }
@@ -62,6 +69,7 @@ func performDeposit(accountBalance float64) float64 {
 		return accountBalance
 	}
 	accountBalance = calculateNewBalance(accountBalance, amount, "deposit")
+	writeBalanceToFile(accountBalance)
 	fmt.Println("Your balance is:", accountBalance)
 	return accountBalance
 }
@@ -78,4 +86,26 @@ func getAmount(text string) float64 {
 	fmt.Print(text)
 	fmt.Scan(&amount)
 	return amount
+}
+
+func writeBalanceToFile(accountBalance float64) {
+	error := os.WriteFile(balanceFileName, []byte(fmt.Sprintf("%.2f", accountBalance)), 0644)
+
+	if error != nil {
+		fmt.Println("Error writing balance to file")
+	}
+}
+
+func getBalanceFromFile() float64 {
+	balance, error := os.ReadFile(balanceFileName)
+	if error != nil {
+		fmt.Println("Error reading balance from file")
+		return 0
+	}
+	balanceFloat, err := strconv.ParseFloat(string(balance), 64)
+	if err != nil {
+		fmt.Println("Error converting balance to float")
+		return 0
+	}
+	return balanceFloat
 }
