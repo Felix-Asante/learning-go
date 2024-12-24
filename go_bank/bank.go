@@ -5,6 +5,7 @@ import "fmt"
 func main() {
 
 	var accountBalance float64 = 1000
+	endApp := false
 
 	fmt.Println("Welcome to Go bank !")
 
@@ -19,16 +20,19 @@ func main() {
 		fmt.Print("Your choice: ")
 		fmt.Scan(&choice)
 
-		wantToWithdraw := choice == 3
-
-		if choice == 1 {
+		switch choice {
+		case 1:
 			fmt.Println("Your balance is:", accountBalance)
-		} else if choice == 2 {
+		case 2:
 			accountBalance = performDeposit(accountBalance)
-		} else if wantToWithdraw {
+		case 3:
 			accountBalance = withrawAmount(accountBalance)
-		} else {
+		default:
 			fmt.Println("Goodbye !")
+			endApp = true
+		}
+
+		if endApp {
 			break
 		}
 	}
