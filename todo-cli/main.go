@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-
 func main() {
-	fmt.Println("GO TODO CLI")
+	todos := Todos{}
+	storage := Storage[Todos]{"todos.json"}
+	storage.load(&todos)
+	cmdFlags := NewCmdFlags()
+	cmdFlags.Execute(&todos)
+	storage.save(todos)
 }
