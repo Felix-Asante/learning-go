@@ -1,6 +1,9 @@
 #### STRUCT
 
-Structs are typed collections of fields. They are useful for grouping related data together to form records.
+Structs are user-defined types that help us create a collection of data describing a single entity.
+
+- Structs are typed collections of fields. They are useful for grouping related data together to form records.
+- Structs are used to describe entities in your application, such as users, products, or orders.
 
 ```go
 type Person struct {

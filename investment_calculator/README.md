@@ -77,7 +77,7 @@ There also are more types like `int8` or `uint8` which work in the same way (=> 
 
 ##### Null Values
 
-All Go value types come with a so-called `null value` which is the value stored in a variable if no other value is explicitly set.
+<em>All Go value types come with a so-called **`null value`** which is the value stored in a variable if no other value is explicitly set.</em>
 
 For example, the following int variable would have a default value of 0 (because 0 is the null value of int, int32 etc):
 
