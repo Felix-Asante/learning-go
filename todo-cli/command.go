@@ -25,12 +25,14 @@ func NewCmdFlags() *cmdFlags {
 	flag.IntVar(&cf.Toggle, "toggle", -1, "Toggle a todo by index")
 	flag.BoolVar(&cf.List, "list", false, "List all todos")
 
+	// parse the command line into the defined flags
 	flag.Parse()
 
 	return &cf
 }
 
 func (cf *cmdFlags) Execute(todo *Todos) {
+	// fmt.Println(flag.Args()) // returns the unFlagged arguments
 	switch {
 	case cf.List:
 		todo.print()
